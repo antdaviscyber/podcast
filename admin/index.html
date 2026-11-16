@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Links admin</title>
+<style>
+@font-face{font-family:"Barber Chop";src:url("https://raw.githubusercontent.com/antdaviscyber/assets/main/BarberChop.otf") format("opentype");font-display:swap}
+:root{--y:#fecf00;--bg:#0b0b0b;--card:#151515;--card2:#1c1c1c;--line:#2d2d2d;--txt:#f3f3f3;--mut:#9b9b9b;--bad:#ff6b6b;--ok:#4ade80;--sched:#7cc4ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.45 Roboto,system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:18px 16px 80px}
+h1,h2,h3{margin:0}
+.brand{font:26px/1 "Barber Chop",Impact,sans-serif;color:var(--y);text-transform:uppercase;letter-spacing:.5px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.tabs{display:flex;gap:6px;margin-bottom:18px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.tab{background:none;border:0;color:var(--mut);padding:10px 14px;font:inherit;font-weight:700;cursor:pointer;border-bottom:3px solid transparent}
+.tab.on{color:var(--y);border-bottom-color:var(--y)}
+button,.btn{font:inherit;cursor:pointer}
+.btn{background:var(--card2);color:var(--txt);border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-weight:600;text-decoration:none;display:inline-block}
+.btn:hover{border-color:var(--y)}
+.btn.pri{background:var(--y);color:#000;border-color:var(--y)}
+.btn.sm{padding:5px 9px;font-size:13px}
+.btn.danger{color:var(--bad)}
+.btn[disabled]{opacity:.4;cursor:default}
+input,select,textarea{width:100%;background:#0f0f0f;color:var(--txt);border:1px solid var(--line);border-radius:10px;padding:9px 11px;font:inherit}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--y)}
+input[type=checkbox]{width:auto;accent-color:var(--y)}
+label{display:block;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mut);margin:0 0 5px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid .full{grid-column:1/-1}
+@media(max-width:620px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+.row{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px}
+.row .ico{flex:none;width:38px;height:38px;border-radius:10px;background:rgba(254,207,0,.12);color:var(--y);display:grid;place-items:center}
+.row .ico svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.row .main{flex:1;min-width:0}
+.row .t{font-weight:700}
+.row .u{color:var(--mut);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;align-items:center;font-size:12px;color:var(--mut)}
+.row .acts{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}
+@media(max-width:620px){.row{flex-wrap:wrap}.row .acts{width:100%;justify-content:flex-start}}
+.badge{display:inline-block;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;border:1px solid var(--line)}
+.badge.live{color:var(--ok);border-color:var(--ok)}
+.badge.sched{color:var(--sched);border-color:var(--sched)}
+.badge.ended{color:var(--y);border-color:var(--y)}
+.badge.off{color:var(--mut)}
+.badge.partner{color:#000;background:var(--y);border-color:var(--y)}
+.hint{color:var(--mut);font-size:13px}
+.quick{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--y);color:#000;padding:10px 16px;border-radius:10px;font-weight:700;z-index:9}
+.toast.err{background:var(--bad);color:#000}
+.login{max-width:360px;margin:12vh auto 0}
+.login .panel{padding:22px}
+.err{color:var(--bad);margin-top:10px;font-size:14px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+.tile{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:12px}
+.tile .n{font-size:28px;font-weight:700;color:var(--y)}
+.tile .l{font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px}
+table{width:100%;border-collapse:collapse;margin:8px 0 18px}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);font-size:14px}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--mut)}
+td.num,th.num{text-align:right}
+.bars{display:flex;align-items:flex-end;gap:2px;height:120px;border-bottom:1px solid var(--line);margin:10px 0 4px}
+.bars .b{flex:1;background:var(--y);min-height:2px;border-radius:3px 3px 0 0;position:relative}
+.bars .b.z{background:var(--line)}
+.axis{display:flex;justify-content:space-between;font-size:11px;color:var(--mut)}
+.rephead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
+.copy{display:flex;gap:8px;align-items:center;margin:6px 0}
+.copy code{flex:1;background:#0f0f0f;border:1px solid var(--line);border-radius:8px;padding:7px 10px;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+@media print{
+  body{background:#fff;color:#000}
+  .no-print,#toast{display:none!important}
+  .wrap{max-width:none;padding:0}
+  .panel{border:0;background:#fff;padding:0}
+  .tile{background:#fff;border:1px solid #bbb}
+  .tile .n{color:#000}
+  th,td{border-bottom:1px solid #ccc;color:#000}
+  th,.tile .l,.hint,.axis{color:#444}
+  .bars{border-bottom:1px solid #888}
+  .bars .b{background:#000;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .bars .b.z{background:#ddd;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .brand{color:#000}
+}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<div id="toast"></div>
+
+<script src="/vendor/supabase.js"></script>
+<script src="/config.js"></script>
+<script>
+(function () {
+  var C = window.LINKS_CONFIG, ICONS = window.LINK_ICONS;
+  var sb = supabase.createClient(C.SUPABASE_URL, C.SUPABASE_KEY, { auth: { persistSession: true, autoRefreshToken: true } });
+  var app = document.getElementById("app");
+
+  var S = {
+    tab: "links", page: "main", links: [], partners: [], settings: {},
+    linkClicks: {}, partnerClicks: {}, editing: null, adding: false,
+    partnerForm: null, report: null,
+    rep: { partner: "", range: "30", from: "", to: "" }
+  };
+
+  // ---------- helpers ----------
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function pad(n) { return String(n).padStart(2, "0"); }
+  function toLocalInput(iso) { if (!iso) return ""; var d = new Date(iso); return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()) + "T" + pad(d.getHours()) + ":" + pad(d.getMinutes()); }
+  function fromLocalInput(v) { return v ? new Date(v).toISOString() : null; }
+  function fmt(iso) { return iso ? new Date(iso).toLocaleString("en-GB", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }) : ""; }
+  function dayStr(d) { return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
+  function startOfDay(d) { return new Date(d.getFullYear(), d.getMonth(), d.getDate()); }
+  function addDays(d, n) { var x = new Date(d); x.setDate(x.getDate() + n); return x; }
+  function toast(msg, bad) {
+    var t = document.getElementById("toast");
+    t.innerHTML = '<div class="toast' + (bad ? " err" : "") + '">' + esc(msg) + "</div>";
+    setTimeout(function () { t.innerHTML = ""; }, bad ? 5000 : 2200);
+  }
+  function iconSvg(key) { return '<svg viewBox="0 0 24 24" aria-hidden="true">' + (ICONS[key] || ICONS.link) + "</svg>"; }
+  function partnerName(id) { var p = S.partners.filter(function (x) { return x.id === id; })[0]; return p ? p.name : ""; }
+
+  function status(l) {
+    var now = Date.now();
+    if (!l.is_enabled) return ["Disabled", "off"];
+    if (l.starts_at && new Date(l.starts_at) > now) return ["Scheduled", "sched"];
+    if (l.ends_at && new Date(l.ends_at) <= now) {
+      var days = (now - new Date(l.ends_at)) / 864e5;
+      if (l.after_end === "show_ended" && days < l.ended_visible_days) return ["Ended (showing greyed)", "ended"];
+      return ["Expired (hidden)", "off"];
+    }
+    return ["Live", "live"];
+  }
+
+  // ---------- auth + load ----------
+  async function boot() {
+    var res = await sb.auth.getSession();
+    if (!res.data.session) return renderLogin();
+    var adm = await sb.rpc("is_admin");
+    if (adm.error || adm.data !== true) return renderLogin("This account is signed in but is not set up as an admin.", true);
+    await load();
+  }
+
+  function renderLogin(msg, signedIn) {
+    app.innerHTML =
+      '<div class="login"><div class="panel">' +
+      '<div class="brand" style="margin-bottom:16px">Links admin</div>' +
+      '<form id="loginForm">' +
+      '<label>Email</label><input type="email" name="email" autocomplete="username" required style="margin-bottom:12px">' +
+      '<label>Password</label><input type="password" name="password" autocomplete="current-password" required>' +
+      '<button class="btn pri" style="width:100%;margin-top:16px" type="submit">Sign in</button>' +
+      (msg ? '<div class="err">' + esc(msg) + "</div>" : "") +
+      "</form>" +
+      (signedIn ? '<p><button class="btn sm" id="signout">Sign out</button></p>' : "") +
+      "</div></div>";
+    document.getElementById("loginForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      var f = new FormData(e.target);
+      var r = await sb.auth.signInWithPassword({ email: f.get("email"), password: f.get("password") });
+      if (r.error) return renderLogin(r.error.message);
+      boot();
+    });
+    var so = document.getElementById("signout");
+    if (so) so.addEventListener("click", async function () { await sb.auth.signOut(); renderLogin(); });
+  }
+
+  async function load() {
+    var from = new Date(Date.now() - 30 * 864e5).toISOString();
+    var to = new Date(Date.now() + 864e5).toISOString();
+    var out = await Promise.all([
+      sb.from("links").select("*").eq("page", S.page).order("sort_order").order("created_at"),
+      sb.from("partners").select("*").order("name"),
+      sb.from("settings").select("*").eq("page", S.page).single(),
+      sb.rpc("link_stats", { p_from: from, p_to: to }),
+      sb.rpc("partner_summary", { p_from: from, p_to: to })
+    ]);
+    for (var i = 0; i < out.length; i++) if (out[i].error) { toast(out[i].error.message, true); }
+    S.links = out[0].data || [];
+    S.partners = out[1].data || [];
+    S.settings = out[2].data || {};
+    S.linkClicks = {};
+    (out[3].data || []).forEach(function (r) { S.linkClicks[r.link_id] = r.clicks; });
+    S.partnerClicks = {};
+    (out[4].data || []).forEach(function (r) { S.partnerClicks[r.partner_id] = r.clicks; });
+    render();
+  }
+
+  // ---------- rendering ----------
+  function render() {
+    var tabs = [["links", "Links"], ["partners", "Partners"], ["report", "Report"], ["profile", "Profile"]];
+    var body = S.tab === "links" ? viewLinks() : S.tab === "partners" ? viewPartners() : S.tab === "report" ? viewReport() : viewProfile();
+    app.innerHTML =
+      '<div class="top no-print"><div class="brand">Links admin</div><div>' +
+      '<a class="btn sm" href="/" target="_blank" rel="noopener">View page</a> ' +
+      '<button class="btn sm" data-a="signout">Sign out</button></div></div>' +
+      '<div class="tabs no-print">' + tabs.map(function (t) { return '<button class="tab' + (S.tab === t[0] ? " on" : "") + '" data-a="tab" data-v="' + t[0] + '">' + t[1] + "</button>"; }).join("") + "</div>" +
+      ((S.tab === "links" || S.tab === "profile") ? pageBar() : "") + body;
+  }
+
+  function pageBar() {
+    var pages = [["main", "Main links page"], ["podcast", "Podcast page"]];
+    return '<div class="no-print" style="margin-bottom:14px;display:flex;gap:6px;align-items:center;flex-wrap:wrap"><span class="hint">Editing:</span>' +
+      pages.map(function (p) { return '<button class="btn sm' + (S.page === p[0] ? " pri" : "") + '" data-a="page" data-v="' + p[0] + '">' + p[1] + "</button>"; }).join("") + "</div>";
+  }
+
+  function episodePanel() {
+    var s = S.settings || {};
+    return '<form class="panel no-print" id="episodeForm"><h3 style="margin-bottom:4px">This week\'s episode</h3>' +
+      '<p class="hint" style="margin:0 0 12px">Paste the new episode title and each platform\'s link for it, then save once. Leave a link as the show link if you do not have the episode link yet.</p><div class="grid">' +
+      '<div class="full"><label>Episode title</label><input name="bio" value="' + esc(s.bio || "") + '"></div>' +
+      '<div class="full"><label>Cover art URL (https)</label><input name="avatar_url" placeholder="https://..." value="' + esc(s.avatar_url || "") + '"></div>' +
+      S.links.map(function (l) { return '<div class="full"><label>' + esc(l.title) + '</label><input name="u_' + esc(l.id) + '" value="' + esc(l.url) + '"></div>'; }).join("") +
+      '</div><div style="margin-top:14px"><button class="btn pri" type="submit">Save episode</button></div></form>';
+  }
+
+  function viewLinks() {
+    var html = (S.page === "podcast" ? episodePanel() : "") + '<div class="no-print" style="margin-bottom:14px"><button class="btn pri" data-a="newlink">+ Add link</button> <span class="hint">Clicks shown are the last 30 days.</span></div>';
+    if (S.adding || S.editing) html += linkForm(S.editing ? S.links.filter(function (l) { return l.id === S.editing; })[0] || {} : {});
+    if (!S.links.length) html += '<p class="hint">No links yet.</p>';
+    S.links.forEach(function (l, i) {
+      var st = status(l);
+      var dates = [];
+      if (l.starts_at) dates.push("Starts " + fmt(l.starts_at));
+      if (l.ends_at) dates.push("Ends " + fmt(l.ends_at) + (l.after_end === "show_ended" ? " (then greyed out)" : " (then hidden)"));
+      html += '<div class="row"><div class="ico">' + iconSvg(l.icon) + "</div>" +
+        '<div class="main"><div class="t">' + esc(l.title) + (l.is_featured ? " &#9733;" : "") + "</div>" +
+        '<div class="u">' + esc(l.url) + "</div>" +
+        '<div class="meta"><span class="badge ' + st[1] + '">' + esc(st[0]) + "</span>" +
+        (l.partner_id ? '<span class="badge partner">' + esc(partnerName(l.partner_id)) + "</span>" : "") +
+        "<span>" + (S.linkClicks[l.id] || 0) + " clicks</span>" +
+        (l.section ? "<span>" + esc(l.section) + "</span>" : "") +
+        dates.map(function (d) { return "<span>" + esc(d) + "</span>"; }).join("") +
+        "</div></div>" +
+        '<div class="acts">' +
+        '<button class="btn sm" data-a="up" data-id="' + l.id + '"' + (i === 0 ? " disabled" : "") + ">&uarr;</button>" +
+        '<button class="btn sm" data-a="down" data-id="' + l.id + '"' + (i === S.links.length - 1 ? " disabled" : "") + ">&darr;</button>" +
+        '<button class="btn sm" data-a="toggle" data-id="' + l.id + '">' + (l.is_enabled ? "Disable" : "Enable") + "</button>" +
+        '<button class="btn sm" data-a="editlink" data-id="' + l.id + '">Edit</button>' +
+        '<button class="btn sm danger" data-a="dellink" data-id="' + l.id + '">Delete</button>' +
+        "</div></div>";
+    });
+    return html;
+  }
+
+  function linkForm(l) {
+    var sections = {};
+    S.links.forEach(function (x) { if (x.section) sections[x.section] = 1; });
+    var icons = Object.keys(ICONS).map(function (k) { return '<option value="' + k + '"' + (l.icon === k ? " selected" : "") + ">" + k + "</option>"; }).join("");
+    var parts = '<option value="">None</option>' + S.partners.map(function (p) { return '<option value="' + p.id + '"' + (l.partner_id === p.id ? " selected" : "") + ">" + esc(p.name) + "</option>"; }).join("");
+    var isNew = !l.id;
+    var afterEnd = l.after_end || "hide";
+    return '<form class="panel no-print" id="linkForm"><h3 style="margin-bottom:12px">' + (isNew ? "New link" : "Edit link") + "</h3>" +
+      '<input type="hidden" name="rowid" value="' + esc(l.id || "") + '">' +
+      '<div class="grid">' +
+      '<div><label>Title *</label><input name="title" required value="' + esc(l.title || "") + '"></div>' +
+      '<div><label>URL *</label><input name="url" required placeholder="https://" value="' + esc(l.url || "") + '"></div>' +
+      '<div class="full"><label>Subtitle (optional)</label><input name="subtitle" value="' + esc(l.subtitle || "") + '"></div>' +
+      '<div><label>Icon</label><select name="icon">' + icons + "</select></div>" +
+      '<div><label>Section heading</label><input name="section" list="sections" placeholder="e.g. Follow, Podcast, Partners" value="' + esc(l.section || "") + '"><datalist id="sections">' + Object.keys(sections).map(function (s) { return '<option value="' + esc(s) + '">'; }).join("") + "</datalist></div>" +
+      '<div><label>Partner</label><select name="partner_id">' + parts + "</select></div>" +
+      '<div style="display:flex;gap:18px;align-items:end;padding-bottom:8px">' +
+      '<label style="margin:0;text-transform:none;font-size:14px;color:var(--txt)"><input type="checkbox" name="is_featured"' + (l.is_featured ? " checked" : "") + "> Featured (top, yellow)</label>" +
+      '<label style="margin:0;text-transform:none;font-size:14px;color:var(--txt)"><input type="checkbox" name="is_enabled"' + (isNew || l.is_enabled ? " checked" : "") + "> Enabled</label></div>" +
+      '<div><label>Goes live (optional)</label><input type="datetime-local" name="starts_at" value="' + toLocalInput(l.starts_at) + '"></div>' +
+      '<div><label>Ends (optional)</label><input type="datetime-local" name="ends_at" value="' + toLocalInput(l.ends_at) + '">' +
+      '<div class="quick"><button type="button" class="btn sm" data-a="endin" data-v="7">+7 days</button><button type="button" class="btn sm" data-a="endin" data-v="14">+14</button><button type="button" class="btn sm" data-a="endin" data-v="30">+30</button><button type="button" class="btn sm" data-a="endin" data-v="0">Clear</button></div></div>' +
+      '<div><label>When it ends</label><select name="after_end"><option value="hide"' + (afterEnd === "hide" ? " selected" : "") + '>Vanish completely</option><option value="show_ended"' + (afterEnd === "show_ended" ? " selected" : "") + '>Show greyed out as "Ended"</option></select></div>' +
+      '<div><label>Keep showing "Ended" for (days)</label><input type="number" min="0" max="365" name="ended_visible_days" value="' + (l.ended_visible_days != null ? l.ended_visible_days : 14) + '"></div>' +
+      "</div>" +
+      '<div style="margin-top:14px;display:flex;gap:8px"><button class="btn pri" type="submit">Save</button><button type="button" class="btn" data-a="cancel">Cancel</button></div></form>';
+  }
+
+  function viewPartners() {
+    var html = '<div class="no-print" style="margin-bottom:14px"><button class="btn pri" data-a="newpartner">+ Add partner</button> <span class="hint">Clicks shown are the last 30 days.</span></div>';
+    if (S.partnerForm) {
+      var p = S.partnerForm === "new" ? {} : S.partners.filter(function (x) { return x.id === S.partnerForm; })[0] || {};
+      html += '<form class="panel no-print" id="partnerForm"><input type="hidden" name="rowid" value="' + esc(p.id || "") + '">' +
+        '<div class="grid"><div><label>Partner name *</label><input name="name" required value="' + esc(p.name || "") + '"></div>' +
+        '<div><label>Notes (private)</label><input name="notes" placeholder="Campaign, contact, rate..." value="' + esc(p.notes || "") + '"></div></div>' +
+        '<div style="margin-top:14px;display:flex;gap:8px"><button class="btn pri" type="submit">Save</button><button type="button" class="btn" data-a="cancel">Cancel</button></div></form>';
+    }
+    if (!S.partners.length) html += '<p class="hint">No partners yet. Add one, then pick it on a link to track that link under the partner.</p>';
+    S.partners.forEach(function (p) {
+      var n = S.links.filter(function (l) { return l.partner_id === p.id; }).length;
+      html += '<div class="row"><div class="main"><div class="t">' + esc(p.name) + "</div>" +
+        (p.notes ? '<div class="u">' + esc(p.notes) + "</div>" : "") +
+        '<div class="meta"><span>' + n + " link" + (n === 1 ? "" : "s") + "</span><span>" + (S.partnerClicks[p.id] || 0) + " clicks (30 days)</span></div></div>" +
+        '<div class="acts"><button class="btn sm" data-a="partnerreport" data-id="' + p.id + '">Report</button>' +
+        '<button class="btn sm" data-a="editpartner" data-id="' + p.id + '">Edit</button>' +
+        '<button class="btn sm danger" data-a="delpartner" data-id="' + p.id + '">Delete</button></div></div>';
+    });
+    return html;
+  }
+
+  function viewReport() {
+    var r = S.rep;
+    var opts = '<option value="">All links</option>' + S.partners.map(function (p) { return '<option value="' + p.id + '"' + (r.partner === p.id ? " selected" : "") + ">" + esc(p.name) + "</option>"; }).join("");
+    var ranges = [["7", "Last 7 days"], ["30", "Last 30 days"], ["90", "Last 90 days"], ["month", "This month"], ["custom", "Custom dates"]]
+      .map(function (x) { return '<option value="' + x[0] + '"' + (r.range === x[0] ? " selected" : "") + ">" + x[1] + "</option>"; }).join("");
+    var html = '<div class="panel no-print"><div class="grid">' +
+      '<div><label>Partner</label><select id="repPartner">' + opts + "</select></div>" +
+      '<div><label>Period</label><select id="repRange">' + ranges + "</select></div>" +
+      (r.range === "custom" ? '<div><label>From</label><input type="date" id="repFrom" value="' + esc(r.from) + '"></div><div><label>To (inclusive)</label><input type="date" id="repTo" value="' + esc(r.to) + '"></div>' : "") +
+      '</div><div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn pri" data-a="runreport">Run report</button>' +
+      '<button class="btn" data-a="print"' + (S.report ? "" : " disabled") + ">Print / Save as PDF</button></div></div>";
+    if (!S.report) return html + '<p class="hint no-print">Pick a partner and period, then run the report.</p>';
+    var d = S.report;
+    var title = d.partner || "All links";
+    var from = new Date(d.from), to = new Date(d.to);
+    var lastDay = addDays(to, -1);
+    var byDay = {}; (d.by_day || []).forEach(function (x) { byDay[x.day] = x.clicks; });
+    var days = [], cur = startOfDay(from), max = 0;
+    while (cur <= lastDay && days.length < 400) { var k = dayStr(cur); var v = byDay[k] || 0; if (v > max) max = v; days.push({ k: k, v: v }); cur = addDays(cur, 1); }
+    var rate = d.page_views > 0 ? ((d.total_clicks / d.page_views) * 100).toFixed(1) + "%" : "n/a";
+    html += '<div class="panel"><div class="rephead"><div><div class="brand">Link report</div><h2 style="margin-top:8px">' + esc(title) + "</h2>" +
+      '<div class="hint">' + from.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }) + " to " + lastDay.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }) + "</div></div>" +
+      '<div class="hint" style="text-align:right">Ant Davis<br>links.antdavis.com<br>Prepared ' + new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }) + "</div></div>" +
+      '<div class="tiles"><div class="tile"><div class="n">' + d.total_clicks + '</div><div class="l">Clicks' + (d.partner ? " on partner links" : "") + '</div></div>' +
+      '<div class="tile"><div class="n">' + d.page_views + '</div><div class="l">Page views (whole page)</div></div>' +
+      '<div class="tile"><div class="n">' + rate + '</div><div class="l">Clicks per page view</div></div></div>' +
+      "<h3>Clicks by link</h3>" +
+      (d.by_link.length ? "<table><thead><tr><th>Link</th><th class='num'>Clicks</th></tr></thead><tbody>" + d.by_link.map(function (x) { return "<tr><td>" + esc(x.title || "(deleted link)") + "</td><td class='num'>" + x.clicks + "</td></tr>"; }).join("") + "</tbody></table>" : '<p class="hint">No clicks in this period.</p>') +
+      "<h3>Clicks by day</h3>" +
+      '<div class="bars">' + days.map(function (x) { return '<div class="b' + (x.v ? "" : " z") + '" title="' + esc(x.k) + ": " + x.v + '" style="height:' + (max ? Math.max(2, Math.round((x.v / max) * 100)) : 2) + '%"></div>'; }).join("") + "</div>" +
+      '<div class="axis"><span>' + esc(days.length ? days[0].k : "") + "</span><span>peak " + max + " in a day</span><span>" + esc(days.length ? days[days.length - 1].k : "") + "</span></div>" +
+      '<h3 style="margin-top:18px">Where the clicks came from</h3>' +
+      (d.by_source.length ? "<table><thead><tr><th>Source</th><th class='num'>Clicks</th></tr></thead><tbody>" + d.by_source.map(function (x) { return "<tr><td>" + esc(x.source) + "</td><td class='num'>" + x.clicks + "</td></tr>"; }).join("") + "</tbody></table>" : "") +
+      '<p class="hint">Clicks are raw taps on a link, not unique people. Page views count once per visitor session. Source comes from the tracked bio links (for example ?s=ig); "direct" means no source tag.</p></div>';
+    return html;
+  }
+
+  function viewProfile() {
+    var s = S.settings;
+    var base = S.page === "podcast" ? "https://podcast.antdavis.com/" : "https://links.antdavis.com/";
+    var srcs = [["Instagram bio", "ig"], ["TikTok bio", "tiktok"], ["YouTube", "yt"], ["LinkedIn", "li"], ["Newsletter", "news"], ["Email signature", "email"]];
+    return '<form class="panel" id="profileForm"><h3 style="margin-bottom:12px">Page profile</h3><div class="grid">' +
+      '<div><label>Name</label><input name="display_name" required value="' + esc(s.display_name || "") + '"></div>' +
+      '<div><label>Tagline</label><input name="tagline" value="' + esc(s.tagline || "") + '"></div>' +
+      '<div class="full"><label>' + (S.page === "podcast" ? "Latest episode title" : "Short bio") + '</label><textarea name="bio" rows="2">' + esc(s.bio || "") + "</textarea></div>" +
+      '<div class="full"><label>' + (S.page === "podcast" ? "Cover art URL (https)" : "Photo URL (https, optional)") + '</label><input name="avatar_url" placeholder="https://..." value="' + esc(s.avatar_url || "") + '"></div></div>' +
+      '<div style="margin-top:14px"><button class="btn pri" type="submit">Save profile</button></div></form>' +
+      '<div class="panel"><h3 style="margin-bottom:6px">Tracked bio links</h3><p class="hint">Use a different link on each platform. Reports then show which platform sent each click.</p>' +
+      srcs.map(function (x) { var u = base + "?s=" + x[1]; return '<div class="copy"><span style="width:130px;flex:none">' + esc(x[0]) + "</span><code>" + esc(u) + '</code><button class="btn sm" data-a="copy" data-v="' + esc(u) + '">Copy</button></div>'; }).join("") + "</div>";
+  }
+
+  // ---------- actions ----------
+  async function saveLink(form) {
+    var f = new FormData(form);
+    var url = String(f.get("url") || "").trim();
+    if (!/^(https?:\/\/|mailto:)/i.test(url)) url = "https://" + url;
+    var row = {
+      title: String(f.get("title") || "").trim(), url: url, page: S.page,
+      subtitle: String(f.get("subtitle") || "").trim() || null,
+      icon: f.get("icon") || null,
+      section: String(f.get("section") || "").trim() || null,
+      partner_id: f.get("partner_id") || null,
+      is_featured: f.get("is_featured") === "on",
+      is_enabled: f.get("is_enabled") === "on",
+      starts_at: fromLocalInput(f.get("starts_at")),
+      ends_at: fromLocalInput(f.get("ends_at")),
+      after_end: f.get("after_end"),
+      ended_visible_days: parseInt(f.get("ended_visible_days"), 10)
+    };
+    if (isNaN(row.ended_visible_days)) row.ended_visible_days = 14;
+    if (row.starts_at && row.ends_at && new Date(row.ends_at) <= new Date(row.starts_at)) return toast("The end date has to be after the start date.", true);
+    var id = f.get("rowid"), r;
+    if (id) r = await sb.from("links").update(row).eq("id", id);
+    else {
+      var max = S.links.reduce(function (m, l) { return Math.max(m, l.sort_order || 0); }, 0);
+      row.sort_order = max + 10;
+      r = await sb.from("links").insert(row);
+    }
+    if (r.error) return toast(r.error.message, true);
+    S.adding = false; S.editing = null; toast("Saved");
+    load();
+  }
+
+  async function move(id, dir) {
+    var arr = S.links.slice(), i = arr.findIndex(function (x) { return x.id === id; }), j = i + dir;
+    if (i < 0 || j < 0 || j >= arr.length) return;
+    var t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+    var jobs = [];
+    arr.forEach(function (x, k) { if (x.sort_order !== (k + 1) * 10) jobs.push(sb.from("links").update({ sort_order: (k + 1) * 10 }).eq("id", x.id)); });
+    var res = await Promise.all(jobs);
+    var bad = res.filter(function (r) { return r.error; })[0];
+    if (bad) toast(bad.error.message, true);
+    load();
+  }
+
+  async function runReport() {
+    var r = S.rep, now = new Date(), from, to;
+    if (r.range === "custom") {
+      if (!r.from || !r.to) return toast("Pick both dates.", true);
+      from = startOfDay(new Date(r.from + "T00:00:00")); to = addDays(startOfDay(new Date(r.to + "T00:00:00")), 1);
+      if (to <= from) return toast("The end date has to be after the start date.", true);
+    } else if (r.range === "month") {
+      from = new Date(now.getFullYear(), now.getMonth(), 1); to = addDays(startOfDay(now), 1);
+    } else {
+      to = addDays(startOfDay(now), 1); from = addDays(to, -parseInt(r.range, 10));
+    }
+    var res = await sb.rpc("partner_report", { p_partner: r.partner || null, p_from: from.toISOString(), p_to: to.toISOString() });
+    if (res.error) return toast(res.error.message, true);
+    S.report = res.data; render();
+  }
+
+  app.addEventListener("change", function (e) {
+    if (e.target.id === "repPartner") S.rep.partner = e.target.value;
+    if (e.target.id === "repRange") { S.rep.range = e.target.value; S.report = null; render(); }
+    if (e.target.id === "repFrom") S.rep.from = e.target.value;
+    if (e.target.id === "repTo") S.rep.to = e.target.value;
+  });
+
+  app.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    var fid = e.target.getAttribute("id");
+    if (fid === "linkForm") return saveLink(e.target);
+    if (fid === "partnerForm") {
+      var f = new FormData(e.target), row = { name: String(f.get("name")).trim(), notes: String(f.get("notes") || "").trim() || null }, id = f.get("rowid");
+      var r = id ? await sb.from("partners").update(row).eq("id", id) : await sb.from("partners").insert(row);
+      if (r.error) return toast(r.error.message, true);
+      S.partnerForm = null; toast("Saved"); return load();
+    }
+    if (fid === "episodeForm") {
+      var q = new FormData(e.target), cover = String(q.get("avatar_url") || "").trim();
+      if (cover && !/^https:\/\//i.test(cover)) return toast("Cover art URL must start with https://", true);
+      var jobs = [sb.from("settings").update({ bio: String(q.get("bio") || "").trim() || null, avatar_url: cover || null }).eq("page", S.page)];
+      S.links.forEach(function (l) {
+        var u = String(q.get("u_" + l.id) || "").trim();
+        if (!u || u === l.url) return;
+        if (!/^(https?:\/\/|mailto:)/i.test(u)) u = "https://" + u;
+        jobs.push(sb.from("links").update({ url: u }).eq("id", l.id));
+      });
+      var rs = await Promise.all(jobs), bad = rs.filter(function (x) { return x.error; })[0];
+      if (bad) return toast(bad.error.message, true);
+      toast("Episode updated"); return load();
+    }
+    if (fid === "profileForm") {
+      var p = new FormData(e.target);
+      var av = String(p.get("avatar_url") || "").trim();
+      if (av && !/^https:\/\//i.test(av)) return toast("Photo URL must start with https://", true);
+      var r2 = await sb.from("settings").update({ display_name: String(p.get("display_name")).trim(), tagline: String(p.get("tagline") || "").trim() || null, bio: String(p.get("bio") || "").trim() || null, avatar_url: av || null }).eq("page", S.page);
+      if (r2.error) return toast(r2.error.message, true);
+      toast("Saved"); return load();
+    }
+  });
+
+  app.addEventListener("click", async function (e) {
+    var b = e.target.closest("[data-a]");
+    if (!b) return;
+    var a = b.dataset.a, id = b.dataset.id, v = b.dataset.v;
+    if (a === "page") { S.page = v; S.adding = false; S.editing = null; await load(); return; }
+    if (a === "tab") { S.tab = v; S.adding = false; S.editing = null; S.partnerForm = null; render(); }
+    else if (a === "signout") { await sb.auth.signOut(); renderLogin(); }
+    else if (a === "newlink") { S.adding = true; S.editing = null; render(); window.scrollTo(0, 0); }
+    else if (a === "editlink") { S.editing = id; S.adding = false; render(); window.scrollTo(0, 0); }
+    else if (a === "cancel") { S.adding = false; S.editing = null; S.partnerForm = null; render(); }
+    else if (a === "up") move(id, -1);
+    else if (a === "down") move(id, 1);
+    else if (a === "toggle") {
+      var l = S.links.filter(function (x) { return x.id === id; })[0];
+      var r = await sb.from("links").update({ is_enabled: !l.is_enabled }).eq("id", id);
+      if (r.error) toast(r.error.message, true); load();
+    }
+    else if (a === "dellink") {
+      if (!confirm("Delete this link? Its past clicks stay in your reports.")) return;
+      var r3 = await sb.from("links").delete().eq("id", id);
+      if (r3.error) toast(r3.error.message, true); else toast("Deleted"); load();
+    }
+    else if (a === "endin") {
+      var inp = document.querySelector('#linkForm [name="ends_at"]');
+      inp.value = v === "0" ? "" : toLocalInput(new Date(Date.now() + parseInt(v, 10) * 864e5).toISOString());
+    }
+    else if (a === "newpartner") { S.partnerForm = "new"; render(); }
+    else if (a === "editpartner") { S.partnerForm = id; render(); }
+    else if (a === "delpartner") {
+      if (!confirm("Delete this partner? Their links stay but are untagged, and their past clicks will no longer be attributed to them. Print their report first if you need it.")) return;
+      var r4 = await sb.from("partners").delete().eq("id", id);
+      if (r4.error) toast(r4.error.message, true); else toast("Deleted"); load();
+    }
+    else if (a === "partnerreport") { S.tab = "report"; S.rep.partner = id; S.report = null; render(); runReport(); }
+    else if (a === "runreport") runReport();
+    else if (a === "print") window.print();
+    else if (a === "copy") { try { await navigator.clipboard.writeText(v); toast("Copied"); } catch (err) { toast("Copy failed, select the text instead.", true); } }
+  });
+
+  boot();
+})();
+</script>
+</body>
+</html>

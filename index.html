@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Click Happens: Human Cyber News with Ant Davis</title>
+<meta name="description" content="Listen to the latest episode of Click Happens: Human Cyber News with Ant Davis, on YouTube, Spotify, Apple Podcasts and more.">
+<meta name="theme-color" content="#000000">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Click Happens: Human Cyber News with Ant Davis">
+<meta property="og:description" content="Listen to the latest episode on YouTube, Spotify, Apple Podcasts and more.">
+<meta property="og:url" content="https://podcast.antdavis.com">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+@font-face{
+  font-family:"Barber Chop";
+  src:url("https://raw.githubusercontent.com/antdaviscyber/assets/main/BarberChop.otf") format("opentype");
+  font-display:swap;
+}
+:root{--y:#fecf00;--card:#141414;--line:#2b2b2b;--txt:#f5f5f5;--mut:#a3a3a3}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:#000;color:var(--txt);min-height:100vh;
+  font-family:Roboto,system-ui,-apple-system,"Segoe UI",sans-serif;
+  background-image:
+    radial-gradient(90% 46% at 50% -8%,rgba(254,207,0,.30),transparent 70%),
+    radial-gradient(60% 40% at 100% 100%,rgba(254,207,0,.09),transparent 70%);
+  background-repeat:no-repeat;background-attachment:fixed;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:480px;margin:0 auto;padding:52px 18px calc(40px + env(safe-area-inset-bottom))}
+header{text-align:center;margin-bottom:30px}
+.avatar{
+  width:96px;height:96px;border-radius:50%;margin:0 auto 16px;overflow:hidden;
+  background:var(--y);color:#000;display:grid;place-items:center;
+  font:34px/1 "Barber Chop",Impact,"Arial Black",sans-serif;
+  box-shadow:0 0 0 3px #000,0 0 0 5px var(--y),0 10px 40px rgba(254,207,0,.25);
+}
+.avatar img{width:100%;height:100%;object-fit:cover;display:block}
+h1{
+  margin:0;font:38px/1.05 "Barber Chop",Impact,"Arial Black",sans-serif;
+  letter-spacing:.5px;text-transform:uppercase;color:var(--y);
+}
+.tag{margin:8px 0 0;font-weight:700;font-size:15px;letter-spacing:.3px}
+.bio{margin:10px auto 0;max-width:340px;color:var(--mut);font-size:14px;line-height:1.5}
+h2{
+  margin:26px 0 10px;font-size:12px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--y);
+}
+.link{
+  display:flex;align-items:center;gap:14px;padding:14px 16px;margin:0 0 12px;
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  color:var(--txt);text-decoration:none;
+  transition:transform .15s ease,border-color .15s ease;
+}
+a.link:hover,a.link:focus-visible{transform:translateY(-2px);border-color:var(--y);outline:none}
+a.link:active{transform:scale(.99)}
+.ico{flex:none;width:42px;height:42px;border-radius:12px;background:rgba(254,207,0,.12);display:grid;place-items:center;color:var(--y)}
+.ico svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.body{flex:1;min-width:0}
+.t{font-weight:700;font-size:16px;line-height:1.25}
+.s{font-size:13px;color:var(--mut);margin-top:2px;line-height:1.35}
+.soon{font-size:12px;font-weight:700;color:var(--y);margin-top:3px}
+.arrow{flex:none;width:18px;height:18px;stroke:var(--mut);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.link.featured{background:var(--y);border-color:var(--y);color:#000}
+.link.featured .ico{background:#000;color:var(--y)}
+.link.featured .s{color:rgba(0,0,0,.72)}
+.link.featured .soon{color:#000}
+.link.featured .arrow{stroke:#000}
+.link.ended{opacity:.42;filter:grayscale(1);cursor:default}
+.pill{flex:none;font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;border:1px solid var(--mut);color:var(--mut);padding:3px 8px;border-radius:99px}
+footer{margin-top:34px;text-align:center;font-size:12px;color:#666}
+footer a{color:#888;text-decoration:none}
+.note{margin:0 0 14px;text-align:center;font-size:12px;color:var(--mut)}
+.label{margin:20px 0 0;font-size:12px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--y)}
+body.pod .avatar{width:220px;height:220px;border-radius:26px;font-size:76px;box-shadow:0 0 0 3px #000,0 0 0 5px var(--y),0 18px 60px rgba(254,207,0,.28)}
+body.pod h1{font-size:34px}
+body.pod .bio{color:var(--txt);font-size:18px;font-weight:700;line-height:1.35;margin-top:6px;max-width:420px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="avatar" id="avatar">AD</div>
+    <h1 id="name">Ant Davis</h1>
+    <p class="tag" id="tagline">Keeping Cyber Simple</p>
+    <p class="label" id="eplabel" hidden>Latest episode</p>
+    <p class="bio" id="bio"></p>
+  </header>
+  <main id="links"></main>
+  <noscript>
+    <a class="link" href="https://youtube.com/@antdaviscyber"><div class="body"><div class="t">Watch on YouTube</div></div></a>
+    <a class="link" href="https://open.spotify.com/show/7rwzcRsKrXbASFBfiXoCZ6"><div class="body"><div class="t">Listen on Spotify</div></div></a>
+    <a class="link" href="https://podcasts.apple.com/us/podcast/id1784126196"><div class="body"><div class="t">Listen on Apple Podcasts</div></div></a>
+    <a class="link" href="https://pod.link/1784126196"><div class="body"><div class="t">More ways to listen</div></div></a>
+  </noscript>
+  <footer>@antdaviscyber &middot; <a href="https://antdavis.com">antdavis.com</a></footer>
+</div>
+
+<script>window.LINKS_PAGE = "podcast";</script>
+<script src="/config.js"></script>
+<script>
+(function () {
+  var C = window.LINKS_CONFIG, ICONS = window.LINK_ICONS;
+  var PAGE = window.LINKS_PAGE || "main";
+  var IS_POD = PAGE === "podcast";
+  if (IS_POD) document.body.classList.add("pod");
+  var CACHE_KEY = "ant_links_cache_v1_" + PAGE;
+  var DAY = 864e5;
+
+  // Traffic source, from links like links.antdavis.com/?s=ig
+  var rawSrc = (new URLSearchParams(location.search).get("s") || "").toLowerCase();
+  var SRC = /^[a-z0-9_-]{1,40}$/.test(rawSrc) ? rawSrc : null;
+
+  function rpc(name, body, extra) {
+    var opts = {
+      method: "POST",
+      headers: { apikey: C.SUPABASE_KEY, "Content-Type": "application/json" },
+      body: JSON.stringify(body || {})
+    };
+    if (extra) for (var k in extra) opts[k] = extra[k];
+    return fetch(C.SUPABASE_URL + "/rest/v1/rpc/" + name, opts);
+  }
+
+  function state(l, now) {
+    if (!l.ends_at) return "live";
+    var end = new Date(l.ends_at).getTime();
+    if (end > now) return "live";
+    if (l.after_end === "show_ended" && now - end < (l.ended_visible_days || 14) * DAY) return "ended";
+    return "hidden";
+  }
+
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+
+  function icon(key) {
+    var path = ICONS[key] || ICONS.link;
+    var wrap = el("div", "ico");
+    wrap.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">' + path + "</svg>"; // static, from config.js only
+    return wrap;
+  }
+
+  function endsText(l, now) {
+    if (!l.ends_at) return null;
+    var left = new Date(l.ends_at).getTime() - now;
+    if (left <= 0 || left > 7 * DAY) return null;
+    if (left < DAY) return "Ends today";
+    var d = Math.ceil(left / DAY);
+    return "Ends in " + d + " day" + (d === 1 ? "" : "s");
+  }
+
+  function endedText(l) {
+    var d = new Date(l.ends_at);
+    return "Ended " + d.toLocaleDateString("en-GB", { day: "numeric", month: "short" });
+  }
+
+  function safeUrl(u) { return /^(https?:\/\/|mailto:)/i.test(u || "") ? u : null; }
+
+  function card(l, st, now) {
+    var ended = st === "ended";
+    var href = ended ? null : safeUrl(l.url);
+    var node = href ? el("a", "link") : el("div", "link");
+    if (href) { node.href = href; node.rel = "noopener"; }
+    if (l.is_featured && !ended) node.classList.add("featured");
+    if (ended) node.classList.add("ended");
+    node.appendChild(icon(l.icon));
+    var body = el("div", "body");
+    body.appendChild(el("div", "t", l.title));
+    if (l.subtitle) body.appendChild(el("div", "s", l.subtitle));
+    var soon = ended ? null : endsText(l, now);
+    if (soon) body.appendChild(el("div", "soon", soon));
+    node.appendChild(body);
+    if (ended) {
+      node.appendChild(el("span", "pill", endedText(l)));
+    } else if (href) {
+      var a = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      a.setAttribute("viewBox", "0 0 24 24"); a.setAttribute("class", "arrow");
+      a.innerHTML = '<path d="M9 5l7 7-7 7"/>';
+      node.appendChild(a);
+      var track = function () {
+        if (String(l.id).indexOf("fb") === 0) return;
+        try { rpc("track_click", { p_link: l.id, p_source: SRC }, { keepalive: true }).catch(function () {}); } catch (e) {}
+      };
+      node.addEventListener("click", track);
+      node.addEventListener("auxclick", track);
+    }
+    return node;
+  }
+
+  function render(data, note) {
+    var s = data.settings || {};
+    var av0 = document.getElementById("avatar");
+    document.getElementById("name").textContent = s.display_name || "Ant Davis";
+    document.getElementById("tagline").textContent = s.tagline || "";
+    document.getElementById("bio").textContent = s.bio || "";
+    document.getElementById("eplabel").hidden = !(IS_POD && s.bio);
+    var initials = String(s.display_name || "Ant Davis").split(/\s+/).slice(0, 2).map(function (w) { return w.charAt(0).toUpperCase(); }).join("");
+    if (!(s.avatar_url && /^https:\/\//i.test(s.avatar_url))) av0.textContent = initials;
+    var av = document.getElementById("avatar");
+    if (s.avatar_url && /^https:\/\//i.test(s.avatar_url)) {
+      av.textContent = "";
+      var img = document.createElement("img");
+      img.src = s.avatar_url; img.alt = s.display_name || "Ant Davis";
+      av.appendChild(img);
+    }
+    var now = Date.now();
+    var items = [];
+    (data.links || []).forEach(function (l) {
+      var st = state(l, now);
+      if (st !== "hidden") items.push({ l: l, st: st });
+    });
+    var root = document.getElementById("links");
+    root.textContent = "";
+    if (note) root.appendChild(el("p", "note", note));
+
+    // Featured links first, then each section in the order it first appears.
+    items.filter(function (x) { return x.l.is_featured && x.st === "live"; })
+      .forEach(function (x) { root.appendChild(card(x.l, x.st, now)); });
+
+    var order = [], groups = {};
+    items.forEach(function (x) {
+      if (x.l.is_featured && x.st === "live") return;
+      var key = x.l.section || "";
+      if (!groups[key]) { groups[key] = []; order.push(key); }
+      groups[key].push(x);
+    });
+    order.forEach(function (key) {
+      if (key) root.appendChild(el("h2", null, key));
+      groups[key].forEach(function (x) { root.appendChild(card(x.l, x.st, now)); });
+    });
+  }
+
+  function readCache() {
+    try { return JSON.parse(localStorage.getItem(CACHE_KEY) || "null"); } catch (e) { return null; }
+  }
+  function writeCache(d) {
+    try { localStorage.setItem(CACHE_KEY, JSON.stringify(d)); } catch (e) {}
+  }
+
+  var cached = readCache();
+  if (cached) render(cached);
+
+  rpc("get_page", { p_page: PAGE })
+    .then(function (r) { if (!r.ok) throw new Error("bad status"); return r.json(); })
+    .then(function (data) {
+      if (!data || !data.links) throw new Error("bad data");
+      writeCache(data);
+      render(data);
+    })
+    .catch(function () {
+      if (cached) return; // already showing the saved copy
+      render({ settings: IS_POD ? { display_name: "Click Happens", tagline: "Human Cyber News with Ant Davis" } : {}, links: IS_POD ? C.FALLBACK_LINKS_PODCAST : C.FALLBACK_LINKS }, IS_POD ? "Showing the main places to listen while the rest loads." : "Showing my main profiles while the rest loads.");
+    });
+
+  // Count the visit once per browser session.
+  try {
+    if (!sessionStorage.getItem("ant_links_viewed_" + PAGE)) {
+      sessionStorage.setItem("ant_links_viewed_" + PAGE, "1");
+      rpc("track_view", { p_source: SRC, p_page: PAGE }, { keepalive: true }).catch(function () {});
+    }
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>
